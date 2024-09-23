@@ -13,6 +13,8 @@ app.use(cors())
 
 app.use(express.json())
 
+const PORT=process.env.PORT || 5000
+
 app.get("/tasks",async(req,res)=>{ 
     try {
         const tasks=await Task.find({});
@@ -51,7 +53,11 @@ app.delete("/tasks/:id",async(req,res)=>{
 })
 
 
-app.listen(5000,()=>{
+app.listen(PORT,()=>{
     connectDB();
     console.log("server started at http://localhost:5000")
+})
+
+app.use("/",(req,res)=>{
+    res.send("Tasks app")
 })
